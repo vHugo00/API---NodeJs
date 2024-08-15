@@ -1,23 +1,30 @@
-import express from 'express'
+import express from 'express';
 
-const app = express()
-app.use(express.json())
+// Inicializa o aplicativo Express
+const app = express();
 
-const users = []
+// Middleware para permitir o uso de JSON no corpo das requisições
+app.use(express.json());
 
-app.post('/users', (req, res) => {
-  users.push(req.body)
-  res.send('Ok post, deu certo')
-})
+// Array para armazenar os usuários
+const users = [];
 
+// Rota POST para adicionar um novo usuário
+app.post('/user', (req, res) => {
+  // Adiciona o corpo da requisição (dados do usuário) ao array de usuários
+  users.push(req.body);
 
-app.get('/users', (req, res) => {
-  res.json(users)
-})
+  // Retorna uma resposta com status 201 (Criado) e o usuário adicionado em formato JSON
+  res.status(201).json(req.body);
+});
 
-app.listen(3000)
+// Rota GET para retornar todos os usuários
+app.get('/user', (req, res) => {
+  // Retorna uma resposta com status 200 (OK) e a lista de usuários em formato JSON
+  res.status(200).json(users);
+});
 
-
-// adiciona - app.post('/users')
-// edita - app.put('/users')
-// deleta - app.delete('/users')
+// Inicia o servidor na porta 3000
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});
