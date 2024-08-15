@@ -1,4 +1,3 @@
-Aqui está uma versão aprimorada da explicação do código para o seu README:
 
 ---
 
